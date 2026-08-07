@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Product } from "@/types/product";
 
 type ProductCardProps = {
@@ -31,6 +32,12 @@ export default function ProductCard({
         <p className="mt-3 text-xl font-bold">
           {formattedPrice}
         </p>
+        <Link
+          href={`/productos/${product.id}`}
+          className="mt-5 block w-full rounded-xl border border-neutral-900 px-4 py-3 text-center font-semibold hover:bg-stone-100"
+        >
+          Ver producto
+        </Link>
 
         <button className="mt-5 w-full rounded-xl bg-neutral-900 px-4 py-3 font-semibold text-white hover:bg-neutral-700">
           Agregar al carrito
