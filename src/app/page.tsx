@@ -1,82 +1,13 @@
 import ProductCard from "@/components/product/ProductCard";
 import { products } from "@/data/products";
+import Header from "@/components/layout/Header";
+import Hero from "@/components/home/Hero";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-stone-100 text-neutral-900">
-      <header className="border-b border-stone-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div>
-            <p className="text-xl font-bold tracking-[0.15em]">
-              VICTORINO
-            </p>
-            <p className="text-xs uppercase tracking-[0.35em] text-amber-700">
-              Calzados
-            </p>
-          </div>
-
-          <nav className="hidden gap-8 text-sm font-medium md:flex">
-            <a href="#inicio" className="hover:text-amber-700">
-              Inicio
-            </a>
-            <a href="#productos" className="hover:text-amber-700">
-              Productos
-            </a>
-            <a href="#categorias" className="hover:text-amber-700">
-              Categorías
-            </a>
-            <a href="#contacto" className="hover:text-amber-700">
-              Contacto
-            </a>
-          </nav>
-
-          <button className="rounded-full bg-neutral-900 px-5 py-2 text-sm font-semibold text-white">
-            Carrito
-          </button>
-        </div>
-      </header>
-
-      <section
-        id="inicio"
-        className="mx-auto grid max-w-7xl gap-8 px-6 py-14 lg:grid-cols-2"
-      >
-        <div className="flex flex-col justify-center rounded-3xl bg-white p-10 lg:p-14">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-amber-700">
-            Nueva colección
-          </p>
-
-          <h1 className="max-w-xl text-5xl font-bold leading-tight tracking-tight lg:text-7xl">
-            Calzado para todos tus pasos.
-          </h1>
-
-          <p className="mt-6 max-w-lg text-lg leading-8 text-neutral-600">
-            Modelos urbanos, deportivos y clásicos con variedad de talles,
-            colores y envíos a todo el país.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="#productos"
-              className="rounded-xl bg-amber-700 px-6 py-3 font-semibold text-white hover:bg-amber-800"
-            >
-              Ver catálogo
-            </a>
-
-            <a
-              href="#categorias"
-              className="rounded-xl border border-stone-300 px-6 py-3 font-semibold hover:bg-stone-100"
-            >
-              Explorar categorías
-            </a>
-          </div>
-        </div>
-
-        <div className="flex min-h-[420px] items-center justify-center rounded-3xl bg-neutral-900">
-          <span className="rotate-[-18deg] text-[160px] drop-shadow-2xl">
-            👟
-          </span>
-        </div>
-      </section>
+     <Header />
+      <Hero />
 
       <section id="categorias" className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-8">
