@@ -1,35 +1,5 @@
-import ProductCard from "../components/ProductCard";
-
-const products = [
-  {
-    id: 1,
-    name: "Urbana Clásica",
-    category: "Urbanos",
-    price: "$74.990",
-    image: "👟",
-  },
-  {
-    id: 2,
-    name: "Runner Pro",
-    category: "Deportivos",
-    price: "$89.990",
-    image: "👟",
-  },
-  {
-    id: 3,
-    name: "Derby Elegante",
-    category: "Clásicos",
-    price: "$109.990",
-    image: "👞",
-  },
-  {
-    id: 4,
-    name: "Bota Victorino",
-    category: "Botas",
-    price: "$124.990",
-    image: "🥾",
-  },
-];
+import ProductCard from "@/components/product/ProductCard";
+import { products } from "@/data/products";
 
 export default function Home() {
   return (
@@ -154,10 +124,7 @@ export default function Home() {
 {products.map((product) => (
   <ProductCard
     key={product.id}
-    name={product.name}
-    category={product.category}
-    price={product.price}
-    image={product.image}
+    product={product}
   />
 ))}
         </div>
