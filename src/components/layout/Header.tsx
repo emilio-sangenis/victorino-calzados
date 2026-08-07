@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <header className="border-b border-stone-200 bg-white">
@@ -13,13 +15,13 @@ export default function Header() {
         </div>
 
         <nav className="hidden gap-8 text-sm font-medium md:flex">
-          <a href="#inicio" className="hover:text-amber-700">
+          <Link href="/" className="hover:text-amber-700">
             Inicio
-          </a>
-
-          <a href="#productos" className="hover:text-amber-700">
+          </Link>
+          
+          <Link href="/productos" className="hover:text-amber-700">
             Productos
-          </a>
+          </Link>
 
           <a href="#categorias" className="hover:text-amber-700">
             Categorías
