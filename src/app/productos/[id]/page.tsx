@@ -60,7 +60,8 @@ export default async function ProductPage({
           <div className="mt-8">
             <p className="mb-3 font-semibold">Talle</p>
             
-            <ProductSelector variants={product.variants} />
+          // Envía el producto completo al selector para poder agregarlo al carrito.
+          <ProductSelector product={product} />
           </div>
         </div>
       </section>
