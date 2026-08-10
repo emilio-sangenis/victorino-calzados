@@ -1,5 +1,6 @@
 // Actualiza el estado de un pedido validando que el nuevo valor pertenezca al enum permitido.
 import { OrderStatus } from "@/generated/prisma/client";
+import { hasAdminSession } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
 
 type StatusRequest = {
@@ -14,6 +15,17 @@ export async function PATCH(
     }>;
   }
 ) {
+  if (!(await hasAdminSession())) {
+    return Response.json(
+      {
+        error: "No autorizado.",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
+
   try {
     const { id } = await context.params;
     const body = (await request.json()) as StatusRequest;
