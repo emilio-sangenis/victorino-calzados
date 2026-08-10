@@ -195,9 +195,12 @@ export default async function AdminPage() {
             </p>
 
             <div className="mt-8 space-y-3">
-              <div className="rounded-xl bg-neutral-800 px-4 py-3">
+              <Link
+                href="/admin/productos"
+                className="block rounded-xl bg-neutral-800 px-4 py-3 hover:bg-neutral-700"
+              >
                 Productos
-              </div>
+              </Link>
               
             <Link
             // Navega desde el dashboard al listado completo de pedidos.
