@@ -25,6 +25,17 @@ type OrderRequest = {
   }[];
 };
 
+// Define la estructura de cada ítem ya validado contra PostgreSQL antes de crear la orden.
+type ValidatedOrderItem = {
+  productId: number;
+  variantId: number;
+  productName: string;
+  color: string;
+  size: number;
+  unitPrice: number;
+  quantity: number;
+};
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as OrderRequest;
@@ -54,7 +65,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const validatedItems = [];
+// Almacena los ítems validados con un tipo explícito para evitar inferencias any durante el build.
+    const validatedItems: ValidatedOrderItem[] = [];
 
     for (const item of body.items) {
       if (
