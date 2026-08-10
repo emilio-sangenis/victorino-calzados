@@ -75,9 +75,18 @@ export default async function AdminProductsPage() {
             </p>
           </div>
 
-          <div className="rounded-xl bg-white px-5 py-3 shadow-sm">
-            <p className="text-sm text-neutral-500">Total de productos</p>
-            <p className="text-2xl font-bold">{products.length}</p>
+          <div className="flex items-center gap-3">
+            <div className="rounded-xl bg-white px-5 py-3 shadow-sm">
+              <p className="text-sm text-neutral-500">Total de productos</p>
+              <p className="text-2xl font-bold">{products.length}</p>
+            </div>
+
+            <Link
+              href="/admin/productos/nuevo"
+              className="rounded-xl bg-neutral-900 px-5 py-3 font-semibold text-white hover:bg-neutral-700"
+            >
+              Nuevo producto
+            </Link>
           </div>
         </div>
 
@@ -143,6 +152,13 @@ export default async function AdminProductsPage() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-end gap-4">
+                          <Link
+                            href={`/admin/productos/${product.id}/editar`}
+                            className="text-sm font-semibold underline-offset-4 hover:underline"
+                          >
+                            Editar
+                          </Link>
+
                           {product.active && (
                             <Link
                               href={`/productos/${product.id}`}
