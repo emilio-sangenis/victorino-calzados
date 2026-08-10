@@ -1,8 +1,9 @@
+// Obtiene un producto real desde PostgreSQL por ID, junto con sus variantes, y renderiza su página de detalle.
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { products } from "@/data/products";
-import { notFound } from "next/navigation";
 import ProductSelector from "@/components/product/ProductSelector";
+import { prisma } from "@/lib/prisma";
+import { notFound } from "next/navigation";
 
 type ProductPageProps = {
   params: Promise<{
@@ -15,11 +16,16 @@ export default async function ProductPage({
 }: ProductPageProps) {
   const { id } = await params;
 
-  const product = products.find(
-    (item) => item.id === Number(id)
-  );
+  const product = await prisma.product.findUnique({
+    where: {
+      id: Number(id),
+    },
+    include: {
+      variants: true,
+    },
+  });
 
-  if (!product) {
+  if (!product || !product.active) {
     notFound();
   }
 
@@ -57,15 +63,11 @@ export default async function ProductPage({
             {product.description}
           </p>
 
-          <div className="mt-8">
-            <p className="mb-3 font-semibold">Talle</p>
-            
-          // Envía el producto completo al selector para poder agregarlo al carrito.
           <ProductSelector product={product} />
-          </div>
         </div>
       </section>
-      <Footer /> 
+
+      <Footer />
     </main>
   );
 }

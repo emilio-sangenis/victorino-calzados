@@ -1,0 +1,101 @@
+﻿productCode,productName,description,category,price,image,sku,color,size,stock,active
+URB-001,Zapatilla Urbana Modelo 01,"Zapatilla Urbana Modelo 01 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,69990,👟,URB-001-NEG-39,Negro,39,2,true
+URB-001,Zapatilla Urbana Modelo 01,"Zapatilla Urbana Modelo 01 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,69990,👟,URB-001-NEG-40,Negro,40,4,true
+URB-001,Zapatilla Urbana Modelo 01,"Zapatilla Urbana Modelo 01 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,69990,👟,URB-001-BLA-40,Blanco,40,6,true
+URB-001,Zapatilla Urbana Modelo 01,"Zapatilla Urbana Modelo 01 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,69990,👟,URB-001-BLA-41,Blanco,41,8,true
+URB-001,Zapatilla Urbana Modelo 01,"Zapatilla Urbana Modelo 01 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,69990,👟,URB-001-GRI-42,Gris,42,10,true
+DEP-002,Runner Modelo 02,"Runner Modelo 02 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,74990,👟,DEP-002-NEG-39,Negro,39,5,true
+DEP-002,Runner Modelo 02,"Runner Modelo 02 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,74990,👟,DEP-002-NEG-40,Negro,40,7,true
+DEP-002,Runner Modelo 02,"Runner Modelo 02 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,74990,👟,DEP-002-AZU-40,Azul,40,9,true
+DEP-002,Runner Modelo 02,"Runner Modelo 02 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,74990,👟,DEP-002-AZU-41,Azul,41,11,true
+DEP-002,Runner Modelo 02,"Runner Modelo 02 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,74990,👟,DEP-002-ROJ-42,Rojo,42,13,true
+CLA-003,Derby Modelo 03,"Derby Modelo 03 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,79990,👞,CLA-003-NEG-39,Negro,39,8,true
+CLA-003,Derby Modelo 03,"Derby Modelo 03 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,79990,👞,CLA-003-NEG-40,Negro,40,10,true
+CLA-003,Derby Modelo 03,"Derby Modelo 03 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,79990,👞,CLA-003-MAR-40,Marrón,40,12,true
+CLA-003,Derby Modelo 03,"Derby Modelo 03 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,79990,👞,CLA-003-MAR-41,Marrón,41,14,true
+CLA-003,Derby Modelo 03,"Derby Modelo 03 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,79990,👞,CLA-003-SUE-42,Suela,42,0,true
+BOT-004,Bota Modelo 04,"Bota Modelo 04 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,84990,🥾,BOT-004-NEG-39,Negro,39,11,true
+BOT-004,Bota Modelo 04,"Bota Modelo 04 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,84990,🥾,BOT-004-NEG-40,Negro,40,13,true
+BOT-004,Bota Modelo 04,"Bota Modelo 04 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,84990,🥾,BOT-004-MAR-40,Marrón,40,15,true
+BOT-004,Bota Modelo 04,"Bota Modelo 04 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,84990,🥾,BOT-004-MAR-41,Marrón,41,1,true
+BOT-004,Bota Modelo 04,"Bota Modelo 04 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,84990,🥾,BOT-004-SUE-42,Suela,42,3,true
+URB-005,Zapatilla Urbana Modelo 05,"Zapatilla Urbana Modelo 05 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,89990,👟,URB-005-NEG-39,Negro,39,14,true
+URB-005,Zapatilla Urbana Modelo 05,"Zapatilla Urbana Modelo 05 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,89990,👟,URB-005-NEG-40,Negro,40,0,true
+URB-005,Zapatilla Urbana Modelo 05,"Zapatilla Urbana Modelo 05 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,89990,👟,URB-005-BLA-40,Blanco,40,2,true
+URB-005,Zapatilla Urbana Modelo 05,"Zapatilla Urbana Modelo 05 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,89990,👟,URB-005-BLA-41,Blanco,41,4,true
+URB-005,Zapatilla Urbana Modelo 05,"Zapatilla Urbana Modelo 05 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,89990,👟,URB-005-GRI-42,Gris,42,6,true
+DEP-006,Runner Modelo 06,"Runner Modelo 06 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,94990,👟,DEP-006-NEG-39,Negro,39,1,true
+DEP-006,Runner Modelo 06,"Runner Modelo 06 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,94990,👟,DEP-006-NEG-40,Negro,40,3,true
+DEP-006,Runner Modelo 06,"Runner Modelo 06 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,94990,👟,DEP-006-AZU-40,Azul,40,5,true
+DEP-006,Runner Modelo 06,"Runner Modelo 06 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,94990,👟,DEP-006-AZU-41,Azul,41,7,true
+DEP-006,Runner Modelo 06,"Runner Modelo 06 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,94990,👟,DEP-006-ROJ-42,Rojo,42,9,true
+CLA-007,Derby Modelo 07,"Derby Modelo 07 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,99990,👞,CLA-007-NEG-39,Negro,39,4,true
+CLA-007,Derby Modelo 07,"Derby Modelo 07 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,99990,👞,CLA-007-NEG-40,Negro,40,6,true
+CLA-007,Derby Modelo 07,"Derby Modelo 07 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,99990,👞,CLA-007-MAR-40,Marrón,40,8,true
+CLA-007,Derby Modelo 07,"Derby Modelo 07 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,99990,👞,CLA-007-MAR-41,Marrón,41,10,true
+CLA-007,Derby Modelo 07,"Derby Modelo 07 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,99990,👞,CLA-007-SUE-42,Suela,42,12,true
+BOT-008,Bota Modelo 08,"Bota Modelo 08 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,104990,🥾,BOT-008-NEG-39,Negro,39,7,true
+BOT-008,Bota Modelo 08,"Bota Modelo 08 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,104990,🥾,BOT-008-NEG-40,Negro,40,9,true
+BOT-008,Bota Modelo 08,"Bota Modelo 08 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,104990,🥾,BOT-008-MAR-40,Marrón,40,11,true
+BOT-008,Bota Modelo 08,"Bota Modelo 08 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,104990,🥾,BOT-008-MAR-41,Marrón,41,13,true
+BOT-008,Bota Modelo 08,"Bota Modelo 08 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,104990,🥾,BOT-008-SUE-42,Suela,42,15,true
+URB-009,Zapatilla Urbana Modelo 09,"Zapatilla Urbana Modelo 09 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,109990,👟,URB-009-NEG-39,Negro,39,10,true
+URB-009,Zapatilla Urbana Modelo 09,"Zapatilla Urbana Modelo 09 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,109990,👟,URB-009-NEG-40,Negro,40,12,true
+URB-009,Zapatilla Urbana Modelo 09,"Zapatilla Urbana Modelo 09 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,109990,👟,URB-009-BLA-40,Blanco,40,14,true
+URB-009,Zapatilla Urbana Modelo 09,"Zapatilla Urbana Modelo 09 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,109990,👟,URB-009-BLA-41,Blanco,41,0,true
+URB-009,Zapatilla Urbana Modelo 09,"Zapatilla Urbana Modelo 09 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,109990,👟,URB-009-GRI-42,Gris,42,2,true
+DEP-010,Runner Modelo 10,"Runner Modelo 10 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,114990,👟,DEP-010-NEG-39,Negro,39,13,true
+DEP-010,Runner Modelo 10,"Runner Modelo 10 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,114990,👟,DEP-010-NEG-40,Negro,40,15,true
+DEP-010,Runner Modelo 10,"Runner Modelo 10 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,114990,👟,DEP-010-AZU-40,Azul,40,1,true
+DEP-010,Runner Modelo 10,"Runner Modelo 10 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,114990,👟,DEP-010-AZU-41,Azul,41,3,true
+DEP-010,Runner Modelo 10,"Runner Modelo 10 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,114990,👟,DEP-010-ROJ-42,Rojo,42,5,true
+CLA-011,Derby Modelo 11,"Derby Modelo 11 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,119990,👞,CLA-011-NEG-39,Negro,39,0,true
+CLA-011,Derby Modelo 11,"Derby Modelo 11 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,119990,👞,CLA-011-NEG-40,Negro,40,2,true
+CLA-011,Derby Modelo 11,"Derby Modelo 11 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,119990,👞,CLA-011-MAR-40,Marrón,40,4,true
+CLA-011,Derby Modelo 11,"Derby Modelo 11 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,119990,👞,CLA-011-MAR-41,Marrón,41,6,true
+CLA-011,Derby Modelo 11,"Derby Modelo 11 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,119990,👞,CLA-011-SUE-42,Suela,42,8,true
+BOT-012,Bota Modelo 12,"Bota Modelo 12 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,124990,🥾,BOT-012-NEG-39,Negro,39,3,true
+BOT-012,Bota Modelo 12,"Bota Modelo 12 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,124990,🥾,BOT-012-NEG-40,Negro,40,5,true
+BOT-012,Bota Modelo 12,"Bota Modelo 12 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,124990,🥾,BOT-012-MAR-40,Marrón,40,7,true
+BOT-012,Bota Modelo 12,"Bota Modelo 12 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,124990,🥾,BOT-012-MAR-41,Marrón,41,9,true
+BOT-012,Bota Modelo 12,"Bota Modelo 12 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,124990,🥾,BOT-012-SUE-42,Suela,42,11,true
+URB-013,Zapatilla Urbana Modelo 13,"Zapatilla Urbana Modelo 13 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,129990,👟,URB-013-NEG-39,Negro,39,6,true
+URB-013,Zapatilla Urbana Modelo 13,"Zapatilla Urbana Modelo 13 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,129990,👟,URB-013-NEG-40,Negro,40,8,true
+URB-013,Zapatilla Urbana Modelo 13,"Zapatilla Urbana Modelo 13 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,129990,👟,URB-013-BLA-40,Blanco,40,10,true
+URB-013,Zapatilla Urbana Modelo 13,"Zapatilla Urbana Modelo 13 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,129990,👟,URB-013-BLA-41,Blanco,41,12,true
+URB-013,Zapatilla Urbana Modelo 13,"Zapatilla Urbana Modelo 13 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,129990,👟,URB-013-GRI-42,Gris,42,14,true
+DEP-014,Runner Modelo 14,"Runner Modelo 14 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,134990,👟,DEP-014-NEG-39,Negro,39,9,true
+DEP-014,Runner Modelo 14,"Runner Modelo 14 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,134990,👟,DEP-014-NEG-40,Negro,40,11,true
+DEP-014,Runner Modelo 14,"Runner Modelo 14 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,134990,👟,DEP-014-AZU-40,Azul,40,13,true
+DEP-014,Runner Modelo 14,"Runner Modelo 14 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,134990,👟,DEP-014-AZU-41,Azul,41,15,true
+DEP-014,Runner Modelo 14,"Runner Modelo 14 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,134990,👟,DEP-014-ROJ-42,Rojo,42,1,true
+CLA-015,Derby Modelo 15,"Derby Modelo 15 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,139990,👞,CLA-015-NEG-39,Negro,39,12,true
+CLA-015,Derby Modelo 15,"Derby Modelo 15 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,139990,👞,CLA-015-NEG-40,Negro,40,14,true
+CLA-015,Derby Modelo 15,"Derby Modelo 15 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,139990,👞,CLA-015-MAR-40,Marrón,40,0,true
+CLA-015,Derby Modelo 15,"Derby Modelo 15 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,139990,👞,CLA-015-MAR-41,Marrón,41,2,true
+CLA-015,Derby Modelo 15,"Derby Modelo 15 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,139990,👞,CLA-015-SUE-42,Suela,42,4,true
+BOT-016,Bota Modelo 16,"Bota Modelo 16 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,144990,🥾,BOT-016-NEG-39,Negro,39,15,true
+BOT-016,Bota Modelo 16,"Bota Modelo 16 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,144990,🥾,BOT-016-NEG-40,Negro,40,1,true
+BOT-016,Bota Modelo 16,"Bota Modelo 16 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,144990,🥾,BOT-016-MAR-40,Marrón,40,3,true
+BOT-016,Bota Modelo 16,"Bota Modelo 16 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,144990,🥾,BOT-016-MAR-41,Marrón,41,5,true
+BOT-016,Bota Modelo 16,"Bota Modelo 16 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,144990,🥾,BOT-016-SUE-42,Suela,42,7,true
+URB-017,Zapatilla Urbana Modelo 17,"Zapatilla Urbana Modelo 17 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,149990,👟,URB-017-NEG-39,Negro,39,2,true
+URB-017,Zapatilla Urbana Modelo 17,"Zapatilla Urbana Modelo 17 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,149990,👟,URB-017-NEG-40,Negro,40,4,true
+URB-017,Zapatilla Urbana Modelo 17,"Zapatilla Urbana Modelo 17 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,149990,👟,URB-017-BLA-40,Blanco,40,6,true
+URB-017,Zapatilla Urbana Modelo 17,"Zapatilla Urbana Modelo 17 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,149990,👟,URB-017-BLA-41,Blanco,41,8,true
+URB-017,Zapatilla Urbana Modelo 17,"Zapatilla Urbana Modelo 17 de Victorino Calzados, modelo de ejemplo para carga masiva.",Urbanos,149990,👟,URB-017-GRI-42,Gris,42,10,true
+DEP-018,Runner Modelo 18,"Runner Modelo 18 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,154990,👟,DEP-018-NEG-39,Negro,39,5,true
+DEP-018,Runner Modelo 18,"Runner Modelo 18 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,154990,👟,DEP-018-NEG-40,Negro,40,7,true
+DEP-018,Runner Modelo 18,"Runner Modelo 18 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,154990,👟,DEP-018-AZU-40,Azul,40,9,true
+DEP-018,Runner Modelo 18,"Runner Modelo 18 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,154990,👟,DEP-018-AZU-41,Azul,41,11,true
+DEP-018,Runner Modelo 18,"Runner Modelo 18 de Victorino Calzados, modelo de ejemplo para carga masiva.",Deportivos,154990,👟,DEP-018-ROJ-42,Rojo,42,13,true
+CLA-019,Derby Modelo 19,"Derby Modelo 19 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,159990,👞,CLA-019-NEG-39,Negro,39,8,true
+CLA-019,Derby Modelo 19,"Derby Modelo 19 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,159990,👞,CLA-019-NEG-40,Negro,40,10,true
+CLA-019,Derby Modelo 19,"Derby Modelo 19 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,159990,👞,CLA-019-MAR-40,Marrón,40,12,true
+CLA-019,Derby Modelo 19,"Derby Modelo 19 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,159990,👞,CLA-019-MAR-41,Marrón,41,14,true
+CLA-019,Derby Modelo 19,"Derby Modelo 19 de Victorino Calzados, modelo de ejemplo para carga masiva.",Clásicos,159990,👞,CLA-019-SUE-42,Suela,42,0,true
+BOT-020,Bota Modelo 20,"Bota Modelo 20 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,164990,🥾,BOT-020-NEG-39,Negro,39,11,true
+BOT-020,Bota Modelo 20,"Bota Modelo 20 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,164990,🥾,BOT-020-NEG-40,Negro,40,13,true
+BOT-020,Bota Modelo 20,"Bota Modelo 20 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,164990,🥾,BOT-020-MAR-40,Marrón,40,15,true
+BOT-020,Bota Modelo 20,"Bota Modelo 20 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,164990,🥾,BOT-020-MAR-41,Marrón,41,1,true
+BOT-020,Bota Modelo 20,"Bota Modelo 20 de Victorino Calzados, modelo de ejemplo para carga masiva.",Botas,164990,🥾,BOT-020-SUE-42,Suela,42,3,true

@@ -1,7 +1,21 @@
+// Obtiene los productos destacados directamente desde PostgreSQL y los muestra en la Home.
 import ProductCard from "@/components/product/ProductCard";
-import { products } from "@/data/products";
+import { prisma } from "@/lib/prisma";
 
-export default function FeaturedProducts() {
+export default async function FeaturedProducts() {
+  const products = await prisma.product.findMany({
+    where: {
+      active: true,
+    },
+    include: {
+      variants: true,
+    },
+    orderBy: {
+      id: "asc",
+    },
+    take: 4,
+  });
+
   return (
     <section id="productos" className="mx-auto max-w-7xl px-6 py-16">
       <div className="mb-8 flex items-end justify-between">
@@ -15,9 +29,12 @@ export default function FeaturedProducts() {
           </h2>
         </div>
 
-        <button className="hidden rounded-xl border border-stone-300 px-5 py-2 font-medium md:block">
+        <a
+          href="/productos"
+          className="hidden rounded-xl border border-stone-300 px-5 py-2 font-medium md:block"
+        >
           Ver todos
-        </button>
+        </a>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

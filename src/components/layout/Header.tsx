@@ -14,15 +14,19 @@ export default function Header() {
   return (
     <header className="border-b border-stone-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <div>
-          <p className="text-xl font-bold tracking-[0.15em]">
-            VICTORINO
-          </p>
+<Link
+// Convierte el nombre de Victorino Calzados en un enlace que permite volver al inicio desde cualquier página.
+  href="/"
+  className="cursor-pointer"
+>
+  <p className="text-xl font-bold tracking-[0.15em]">
+    VICTORINO
+  </p>
 
-          <p className="text-xs uppercase tracking-[0.35em] text-amber-700">
-            Calzados
-          </p>
-        </div>
+  <p className="text-xs uppercase tracking-[0.35em] text-amber-700">
+    Calzados
+  </p>
+</Link>
 
         <nav className="hidden gap-8 text-sm font-medium md:flex">
           <Link href="/" className="hover:text-amber-700">

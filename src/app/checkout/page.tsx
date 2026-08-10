@@ -38,6 +38,12 @@ export default function CheckoutPage() {
   const [orderNumber, setOrderNumber] =
     useState<string | null>(null);
 
+    // Controla el envío del pedido y permite mostrar errores devueltos por el backend.
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [submitError, setSubmitError] =
+  useState<string | null>(null);
+
   const subtotal = items.reduce(
     (total, item) =>
       total + item.product.price * item.quantity,
@@ -70,15 +76,58 @@ export default function CheckoutPage() {
     }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+// Envía el checkout al backend, crea el pedido real y vacía el carrito únicamente si fue guardado correctamente.
+async function handleSubmit(
+  event: FormEvent<HTMLFormElement>
+) {
+  event.preventDefault();
 
-    const generatedOrderNumber =
-      `VC-${Date.now().toString().slice(-8)}`;
+  setIsSubmitting(true);
+  setSubmitError(null);
 
-    setOrderNumber(generatedOrderNumber);
+  try {
+    const response = await fetch("/api/orders", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+// Envía únicamente las referencias y cantidades; el servidor determina precios, stock y totales reales.
+      body: JSON.stringify({
+        customer,
+        shippingMethod,
+        paymentMethod,
+
+        items: items.map((item) => ({
+          productId: item.product.id,
+          variantId: item.variant.id,
+          quantity: item.quantity,
+        })),
+      }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result.error ?? "No se pudo crear el pedido."
+      );
+    }
+
+    setOrderNumber(result.orderNumber);
+
     clearCart();
+  } catch (error) {
+    setSubmitError(
+      error instanceof Error
+        ? error.message
+        : "Ocurrió un error inesperado."
+    );
+  } finally {
+    setIsSubmitting(false);
   }
+}
 
   if (orderNumber) {
     return (
@@ -101,8 +150,10 @@ export default function CheckoutPage() {
               {orderNumber}
             </p>
 
+            {/* Informa al cliente que el pedido fue registrado correctamente. */}
             <p className="mt-6 text-neutral-600">
-              Esta confirmación es simulada por ahora.
+              Recibimos tu pedido correctamente.
+              Conservá el número de pedido para futuras consultas.
             </p>
 
             <Link
@@ -451,12 +502,23 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="mt-8 w-full cursor-pointer rounded-xl bg-neutral-900 px-6 py-4 font-semibold text-white hover:bg-neutral-700"
-            >
-              Confirmar compra
-            </button>
+          
+          <button
+          // Evita confirmar varias veces el mismo pedido mientras se procesa la solicitud.
+            type="submit"
+            disabled={isSubmitting}
+            className="mt-8 w-full cursor-pointer rounded-xl bg-neutral-900 px-6 py-4 font-semibold text-white hover:bg-neutral-700 disabled:cursor-not-allowed disabled:bg-stone-400"
+          >
+            {isSubmitting
+              ? "Procesando..."
+              : "Confirmar compra"}
+          </button>            
+            {submitError && (
+              // Informa al usuario si ocurrió un problema al guardar el pedido.
+              <p className="mt-4 text-sm font-medium text-red-700">
+                {submitError}
+              </p>
+            )}
           </aside>
         </form>
       </section>

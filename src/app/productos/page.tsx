@@ -1,9 +1,22 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/product/ProductCard";
-import { products } from "@/data/products";
+// Importa el cliente de base de datos para obtener el catálogo real desde PostgreSQL.
+import { prisma } from "@/lib/prisma";
 
-export default function ProductsPage() {
+// Obtiene los productos activos desde PostgreSQL y renderiza el catálogo.
+export default async function ProductsPage() {
+  const products = await prisma.product.findMany({
+    where: {
+      active: true,
+    },
+    include: {
+      variants: true,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
   return (
     <main className="min-h-screen bg-stone-100 text-neutral-900">
       <Header />
