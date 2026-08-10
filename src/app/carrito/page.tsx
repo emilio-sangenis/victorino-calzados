@@ -181,8 +181,8 @@ export default function CartPage() {
                 </div>
               </div>
 
-              // Navega desde el carrito hacia el checkout.
               <Link
+              // Navega desde el carrito hacia el checkout.
                 href="/checkout"
                 className="mt-8 block w-full cursor-pointer rounded-xl bg-neutral-900 px-6 py-4 text-center font-semibold text-white hover:bg-neutral-700"
               >
