@@ -11,12 +11,14 @@ type ProductFeaturedControlsProps = {
   productId: number;
   featured: boolean;
   position: number | null;
+  totalFeatured: number;
 };
 
 export default function ProductFeaturedControls({
   productId,
   featured,
   position,
+  totalFeatured,
 }: ProductFeaturedControlsProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -67,7 +69,7 @@ export default function ProductFeaturedControls({
         </button>
         <button
           type="button"
-          disabled={pending || position === 4}
+          disabled={pending || position === totalFeatured}
           onClick={() => runAction(() => moveFeaturedProduct(productId, 1))}
           aria-label="Mover destacado hacia abajo"
           className="size-8 rounded-lg border border-stone-300 text-sm disabled:opacity-30"

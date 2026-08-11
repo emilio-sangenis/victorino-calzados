@@ -15,6 +15,7 @@ export interface Product {
   images?: {
     url: string;
     alt: string;
+    color?: string | null;
   }[];
   variants: ProductVariant[];
 }

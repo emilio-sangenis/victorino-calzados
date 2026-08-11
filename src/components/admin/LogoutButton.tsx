@@ -28,7 +28,7 @@ export default function LogoutButton() {
       <button
         type="submit"
         disabled={pending}
-        className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm font-medium text-neutral-700 transition hover:bg-stone-100"
+        className="rounded-xl border border-fuchsia-400 px-4 py-2 text-sm font-medium text-white transition hover:bg-fuchsia-600 disabled:opacity-60"
       >
         {pending ? "Cerrando sesión..." : "Cerrar sesión"}
       </button>

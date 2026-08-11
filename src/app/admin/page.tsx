@@ -1,24 +1,32 @@
 // Construye el dashboard administrativo utilizando datos reales de productos, stock y pedidos almacenados en PostgreSQL.
 import Link from "next/link";
-import Brand from "@/components/layout/Brand";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminPage() {
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
   const [
-    productCount,
-    orderCount,
-    variants,
+    salesSummary,
+    criticalStockCount,
+    pendingOrderCount,
+    confirmedOrderCount,
+    preparingOrderCount,
     recentOrders,
   ] = await Promise.all([
-    prisma.product.count(),
-
-    prisma.order.count(),
-
-    prisma.productVariant.findMany({
-      select: {
-        stock: true,
+    prisma.order.aggregate({
+      where: {
+        createdAt: { gte: thirtyDaysAgo },
+        status: { not: "CANCELLED" },
       },
+      _sum: { total: true },
+      _count: { id: true },
     }),
+
+    prisma.productVariant.count({ where: { stock: { lte: 3 } } }),
+    prisma.order.count({ where: { status: "PENDING" } }),
+    prisma.order.count({ where: { status: "CONFIRMED" } }),
+    prisma.order.count({ where: { status: "PREPARING" } }),
 
     prisma.order.findMany({
       orderBy: {
@@ -28,15 +36,11 @@ export default async function AdminPage() {
     }),
   ]);
 
-  const totalStock = variants.reduce(
-    (total, variant) => total + variant.stock,
-    0
-  );
-
-  const totalSales = recentOrders.reduce(
-    (total, order) => total + order.total,
-    0
-  );
+  const salesLastThirtyDays = salesSummary._sum.total ?? 0;
+  const ordersLastThirtyDays = salesSummary._count.id;
+  const averageTicket = ordersLastThirtyDays
+    ? Math.round(salesLastThirtyDays / ordersLastThirtyDays)
+    : 0;
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("es-AR", {
@@ -47,19 +51,6 @@ export default async function AdminPage() {
 
   return (
     <main className="min-h-screen bg-stone-300 text-neutral-900">
-      <header className="border-b border-neutral-800 bg-black text-white">
-        <div className="flex w-full items-center justify-between px-6 py-3 lg:px-10">
-          <Brand href="/admin" subtitle="Administración" />
-
-          <Link
-            href="/"
-            className="rounded-xl border border-neutral-600 px-4 py-2 text-sm font-medium hover:bg-neutral-800"
-          >
-            Ver tienda
-          </Link>
-        </div>
-      </header>
-
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-neutral-500">
@@ -76,46 +67,45 @@ export default async function AdminPage() {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <article className="rounded-2xl bg-white p-6 shadow-sm">
-            <p className="text-sm text-neutral-500">
-              Productos
-            </p>
+          <Link
+            href="/admin/pedidos"
+            className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <p className="text-sm text-neutral-500">Ventas · últimos 30 días</p>
+            <p className="mt-3 text-3xl font-bold">{formatPrice(salesLastThirtyDays)}</p>
+          </Link>
 
-            <p className="mt-3 text-3xl font-bold">
-              {productCount}
-            </p>
-          </article>
+          <Link href="/admin/pedidos" className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <p className="text-sm text-neutral-500">Pedidos · últimos 30 días</p>
+            <p className="mt-3 text-3xl font-bold">{ordersLastThirtyDays}</p>
+          </Link>
 
-          <article className="rounded-2xl bg-white p-6 shadow-sm">
-            <p className="text-sm text-neutral-500">
-              Pedidos
-            </p>
+          <Link href="/admin/pedidos" className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <p className="text-sm text-neutral-500">Ticket promedio</p>
+            <p className="mt-3 text-3xl font-bold">{formatPrice(averageTicket)}</p>
+          </Link>
 
-            <p className="mt-3 text-3xl font-bold">
-              {orderCount}
-            </p>
-          </article>
-
-          <article className="rounded-2xl bg-white p-6 shadow-sm">
-            <p className="text-sm text-neutral-500">
-              Unidades en stock
-            </p>
-
-            <p className="mt-3 text-3xl font-bold">
-              {totalStock}
-            </p>
-          </article>
-
-          <article className="rounded-2xl bg-white p-6 shadow-sm">
-            <p className="text-sm text-neutral-500">
-              Últimos 5 pedidos
-            </p>
-
-            <p className="mt-3 text-3xl font-bold">
-              {formatPrice(totalSales)}
-            </p>
-          </article>
+          <Link href="/admin/productos" className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <p className="text-sm text-neutral-500">Variantes con stock crítico</p>
+            <p className="mt-3 text-3xl font-bold text-red-700">{criticalStockCount}</p>
+            <p className="mt-2 text-xs text-neutral-500">3 unidades o menos</p>
+          </Link>
         </div>
+
+        <section className="mt-6 grid gap-4 sm:grid-cols-3">
+          <Link href="/admin/pedidos" className="rounded-2xl bg-neutral-900 p-5 text-white transition hover:bg-neutral-800">
+            <p className="text-sm text-neutral-400">Pendientes</p>
+            <p className="mt-2 text-2xl font-bold">{pendingOrderCount}</p>
+          </Link>
+          <Link href="/admin/pedidos" className="rounded-2xl bg-neutral-900 p-5 text-white transition hover:bg-neutral-800">
+            <p className="text-sm text-neutral-400">Confirmados</p>
+            <p className="mt-2 text-2xl font-bold">{confirmedOrderCount}</p>
+          </Link>
+          <Link href="/admin/pedidos" className="rounded-2xl bg-neutral-900 p-5 text-white transition hover:bg-neutral-800">
+            <p className="text-sm text-neutral-400">En preparación</p>
+            <p className="mt-2 text-2xl font-bold">{preparingOrderCount}</p>
+          </Link>
+        </section>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[2fr_1fr]">
           <section className="rounded-2xl bg-white p-6 shadow-sm">

@@ -1,6 +1,8 @@
 // Obtiene un producto real desde PostgreSQL por ID, junto con sus variantes, y renderiza su página de detalle.
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Link from "next/link";
+import ProductGallery from "@/components/product/ProductGallery";
 import ProductSelector from "@/components/product/ProductSelector";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
@@ -22,6 +24,17 @@ export default async function ProductPage({
     },
     include: {
       variants: true,
+      images: {
+        orderBy: {
+          position: "asc",
+        },
+        select: {
+          id: true,
+          url: true,
+          alt: true,
+          color: true,
+        },
+      },
     },
   });
 
@@ -34,36 +47,63 @@ export default async function ProductPage({
     currency: "ARS",
     maximumFractionDigits: 0,
   }).format(product.price);
+  const normalizeText = (value: string) =>
+    value
+      .trim()
+      .toLocaleLowerCase("es")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  const showDescription =
+    product.description.trim().length > 0 &&
+    normalizeText(product.description) !== normalizeText(product.name);
 
   return (
-    <main className="min-h-screen bg-stone-300 text-neutral-900">
+    <main className="min-h-screen bg-white text-neutral-900">
       <Header />
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-2">
-        <div className="flex aspect-square items-center justify-center rounded-3xl bg-stone-200">
-          <span className="text-[180px]">
-            {product.image}
-          </span>
-        </div>
-
-        <div className="flex flex-col justify-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-700">
+      <section className="mx-auto max-w-[1700px] px-4 py-8 lg:px-6 lg:py-12">
+        <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-neutral-600" aria-label="Navegación del producto">
+          <Link href="/" className="hover:text-fuchsia-600">Inicio</Link>
+          <span>/</span>
+          <Link
+            href={{ pathname: "/productos", query: { categoria: product.category } }}
+            className="hover:text-fuchsia-600"
+          >
             {product.category}
-          </p>
+          </Link>
+          <span>/</span>
+          <span className="text-neutral-900">{product.name}</span>
+        </nav>
 
-          <h1 className="mt-3 text-5xl font-bold">
-            {product.name}
-          </h1>
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,800px)_minmax(360px,480px)] xl:gap-14">
+          <ProductGallery
+            images={product.images}
+            fallback={product.image}
+            productName={product.name}
+          />
 
-          <p className="mt-6 text-3xl font-bold">
-            {formattedPrice}
-          </p>
+          <div className="flex flex-col rounded-2xl bg-stone-200 p-7 shadow-sm lg:sticky lg:top-24 lg:h-[620px] lg:overflow-y-auto lg:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-fuchsia-600">
+              {product.category}
+            </p>
 
-          <p className="mt-6 max-w-xl leading-7 text-neutral-600">
-            {product.description}
-          </p>
+            <h1 className="mt-2 text-4xl font-bold leading-[1.08] lg:text-[44px]">
+              {product.name}
+            </h1>
 
-          <ProductSelector product={product} />
+            <p className="mt-3 text-3xl font-bold leading-tight">{formattedPrice}</p>
+
+            {showDescription && (
+              <div className="mt-6 border-t border-stone-200 pt-5">
+                <h2 className="text-xl font-bold">Descripción</h2>
+                <p className="mt-2 leading-6 text-neutral-600">
+                  {product.description}
+                </p>
+              </div>
+            )}
+
+            <ProductSelector product={product} />
+          </div>
         </div>
       </section>
 

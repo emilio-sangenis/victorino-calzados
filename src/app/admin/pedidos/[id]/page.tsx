@@ -1,7 +1,6 @@
 // Muestra el detalle completo de un pedido real, incluyendo cliente, envío, pago, productos e importes.
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Brand from "@/components/layout/Brand";
 import { prisma } from "@/lib/prisma";
 // Importa el selector interactivo que permite modificar el estado del pedido.
 import OrderStatusSelector from "@/components/admin/OrderStatusSelector";
@@ -45,29 +44,14 @@ export default async function AdminOrderDetailPage({
 
   return (
     <main className="min-h-screen bg-stone-300 text-neutral-900">
-      <header className="border-b border-neutral-800 bg-black text-white">
-        <div className="flex w-full items-center justify-between px-6 py-3 lg:px-10">
-          <Brand href="/admin" subtitle="Administración" />
-
-          <div className="flex gap-3">
-            <Link
-              href="/admin/pedidos"
-              className="rounded-xl border border-neutral-600 px-4 py-2 text-sm font-medium hover:bg-neutral-800"
-            >
-              Volver a pedidos
-            </Link>
-
-            <Link
-              href="/"
-              className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-stone-200"
-            >
-              Ver tienda
-            </Link>
-          </div>
-        </div>
-      </header>
-
       <section className="mx-auto max-w-7xl px-6 py-12">
+        <Link
+          href="/admin/pedidos"
+          className="mb-6 inline-flex text-sm font-semibold text-neutral-700 underline-offset-4 hover:underline"
+        >
+          &lt; Volver a pedidos
+        </Link>
+
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-neutral-500">

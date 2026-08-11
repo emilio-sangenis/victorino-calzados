@@ -22,8 +22,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       variants: true,
       images: {
         orderBy: { position: "asc" },
-        take: 1,
-        select: { url: true, alt: true },
+        select: { url: true, alt: true, color: true },
       },
     },
     orderBy: {

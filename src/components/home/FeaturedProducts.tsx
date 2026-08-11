@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ProductCard from "@/components/product/ProductCard";
+import FeaturedCarousel from "@/components/home/FeaturedCarousel";
 import { prisma } from "@/lib/prisma";
 
 export default async function FeaturedProducts() {
@@ -7,43 +7,45 @@ export default async function FeaturedProducts() {
     where: {
       active: true,
       featured: true,
+      variants: {
+        some: {
+          stock: { gt: 0 },
+        },
+      },
     },
     include: {
       variants: true,
       images: {
         orderBy: { position: "asc" },
-        take: 1,
-        select: { url: true, alt: true },
+        select: { url: true, alt: true, color: true },
       },
     },
     orderBy: {
       featuredPosition: "asc",
     },
-    take: 4,
   });
 
-  const missingSlots = 4 - selectedProducts.length;
-  const fallbackProducts = missingSlots
+  const fallbackProducts = selectedProducts.length === 0
     ? await prisma.product.findMany({
         where: {
           active: true,
-          featured: false,
-          id: {
-            notIn: selectedProducts.map((product) => product.id),
+          variants: {
+            some: {
+              stock: { gt: 0 },
+            },
           },
         },
         include: {
           variants: true,
           images: {
             orderBy: { position: "asc" },
-            take: 1,
-            select: { url: true, alt: true },
+            select: { url: true, alt: true, color: true },
           },
         },
         orderBy: {
           id: "asc",
         },
-        take: missingSlots,
+        take: 4,
       })
     : [];
   const products = [...selectedProducts, ...fallbackProducts];
@@ -66,11 +68,7 @@ export default async function FeaturedProducts() {
         </Link>
       </div>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <FeaturedCarousel products={products} />
     </section>
   );
 }

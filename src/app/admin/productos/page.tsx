@@ -1,7 +1,6 @@
 // Lista el catálogo completo con su disponibilidad, variantes y stock para administrarlo sin eliminar datos históricos.
 import type { Metadata } from "next";
 import Link from "next/link";
-import Brand from "@/components/layout/Brand";
 import ProductActiveToggle from "@/components/admin/ProductActiveToggle";
 import ProductFeaturedControls from "@/components/admin/ProductFeaturedControls";
 import { prisma } from "@/lib/prisma";
@@ -45,31 +44,10 @@ export default async function AdminProductsPage() {
       currency: "ARS",
       maximumFractionDigits: 0,
     }).format(price);
+  const featuredCount = products.filter((product) => product.featured).length;
 
   return (
     <main className="min-h-screen bg-stone-300 text-neutral-900">
-      <header className="border-b border-neutral-800 bg-black text-white">
-        <div className="flex w-full items-center justify-between px-6 py-3 lg:px-10">
-          <Brand href="/admin" subtitle="Administración" />
-
-          <div className="flex gap-3">
-            <Link
-              href="/admin"
-              className="rounded-xl border border-neutral-600 px-4 py-2 text-sm font-medium hover:bg-neutral-800"
-            >
-              Dashboard
-            </Link>
-
-            <Link
-              href="/"
-              className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-stone-200"
-            >
-              Ver tienda
-            </Link>
-          </div>
-        </div>
-      </header>
-
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
@@ -162,6 +140,7 @@ export default async function AdminProductsPage() {
                           productId={product.id}
                           featured={product.featured}
                           position={product.featuredPosition}
+                          totalFeatured={featuredCount}
                         />
                       </td>
                       <td className="px-6 py-4">

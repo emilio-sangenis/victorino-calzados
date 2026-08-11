@@ -37,6 +37,7 @@ export default function ProductSelector({
       variant.color === selectedColor &&
       variant.size === selectedSize
   );
+  const hasStock = variants.some((variant) => variant.stock > 0);
 
   function handleColorSelection(color: string) {
     setSelectedColor(color);
@@ -44,20 +45,20 @@ export default function ProductSelector({
   }
 
   return (
-    <div className="mt-8">
+    <div className="mt-6 flex flex-1 flex-col">
       <div>
-        <p className="mb-3 font-semibold">
+        <p className="mb-2 font-semibold leading-tight">
           Color
         </p>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2.5">
           {colors.map((color) => (
             <button
               key={color}
               onClick={() =>
                 handleColorSelection(color)
               }
-              className={`rounded-xl border px-5 py-3 ${
+              className={`rounded-xl border px-5 py-2.5 ${
                 selectedColor === color
                   ? "border-neutral-900 bg-neutral-900 text-white"
                   : "border-stone-300 bg-white hover:border-neutral-900"
@@ -70,12 +71,12 @@ export default function ProductSelector({
       </div>
 
       {selectedColor && (
-        <div className="mt-8">
-          <p className="mb-3 font-semibold">
+        <div className="mt-6">
+          <p className="mb-2 font-semibold leading-tight">
             Talle
           </p>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2.5">
             {variantsForSelectedColor.map(
               (variant) => (
                 <button
@@ -84,7 +85,7 @@ export default function ProductSelector({
                   onClick={() =>
                     setSelectedSize(variant.size)
                   }
-                  className={`rounded-xl border px-5 py-3 ${
+                  className={`rounded-xl border px-5 py-2.5 ${
                     variant.stock === 0
                       ? "cursor-not-allowed border-stone-200 bg-stone-200 text-stone-400"
                       : selectedSize === variant.size
@@ -101,7 +102,7 @@ export default function ProductSelector({
       )}
 
       {selectedVariant && (
-        <p className="mt-5 text-sm text-neutral-600">
+        <p className="mt-4 text-sm leading-tight text-neutral-600">
           Stock disponible:{" "}
           <strong>
             {selectedVariant.stock}
@@ -109,21 +110,30 @@ export default function ProductSelector({
         </p>
       )}
 
-      <button
-        disabled={
-          !selectedVariant ||
-          selectedVariant.stock === 0
-        }
-        onClick={() => {
-          if (selectedVariant) {
-            addItem(product, selectedVariant);
-          }
-        }}
-        // Muestra el botón de compra con cursor interactivo cuando está habilitado y cursor bloqueado cuando no puede utilizarse.
-        className="mt-8 w-full cursor-pointer rounded-xl bg-neutral-900 px-6 py-4 font-semibold text-white hover:bg-neutral-700 disabled:cursor-not-allowed disabled:bg-stone-300"
-      >
-        Agregar al carrito
-      </button>
+      {hasStock && (
+        <button
+          type="button"
+          disabled={!selectedVariant || selectedVariant.stock === 0}
+          onClick={() => {
+            if (selectedVariant && selectedVariant.stock > 0) {
+              addItem(product, selectedVariant);
+            }
+          }}
+          className={`mt-auto w-full rounded-xl px-6 py-3.5 font-semibold text-white transition ${
+            selectedVariant && selectedVariant.stock > 0
+              ? "cursor-pointer bg-neutral-900 hover:bg-neutral-700"
+              : "cursor-not-allowed bg-neutral-400"
+          }`}
+        >
+          Agregar al carrito
+        </button>
+      )}
+
+      {!hasStock && (
+        <span className="mt-auto block w-full cursor-not-allowed rounded-xl bg-neutral-400 px-6 py-3.5 text-center font-semibold text-white">
+          Sin stock
+        </span>
+      )}
     </div>
   );
 }

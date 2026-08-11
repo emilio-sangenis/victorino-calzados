@@ -121,10 +121,6 @@ export async function setProductFeatured(
       where: { featured: true },
     });
 
-    if (featuredCount >= 4) {
-      return { success: false, error: "Ya hay cuatro productos destacados." };
-    }
-
     await prisma.product.update({
       where: { id: productId },
       data: { featured: true, featuredPosition: featuredCount + 1 },
@@ -168,7 +164,7 @@ export async function moveFeaturedProduct(
   }
 
   const targetPosition = product.featuredPosition + direction;
-  if (targetPosition < 1 || targetPosition > 4) {
+  if (targetPosition < 1) {
     return { success: true };
   }
 
