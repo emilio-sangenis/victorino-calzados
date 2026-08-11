@@ -12,5 +12,9 @@ export interface Product {
   category: string;
   price: number;
   image: string;
+  images?: {
+    url: string;
+    alt: string;
+  }[];
   variants: ProductVariant[];
 }

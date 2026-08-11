@@ -52,7 +52,7 @@ export default async function ProductVariantsPage({
     }).format(date);
 
   return (
-    <main className="min-h-screen bg-stone-100 px-6 py-12 text-neutral-900">
+    <main className="min-h-screen bg-stone-300 px-6 py-12 text-neutral-900">
       <section className="mx-auto max-w-6xl">
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>

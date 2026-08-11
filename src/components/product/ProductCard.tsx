@@ -8,6 +8,7 @@ type ProductCardProps = {
 export default function ProductCard({
   product,
 }: ProductCardProps) {
+  const primaryImage = product.images?.[0];
   const formattedPrice = new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",
@@ -16,8 +17,17 @@ export default function ProductCard({
 
   return (
     <article className="overflow-hidden rounded-2xl bg-white shadow-sm">
-      <div className="flex aspect-square items-center justify-center bg-stone-200">
-        <span className="text-8xl">{product.image}</span>
+      <div className="flex aspect-square items-center justify-center overflow-hidden bg-stone-200">
+        {primaryImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={primaryImage.url}
+            alt={primaryImage.alt}
+            className="size-full object-cover transition duration-500 hover:scale-105"
+          />
+        ) : (
+          <span className="text-8xl">{product.image}</span>
+        )}
       </div>
 
       <div className="p-5">

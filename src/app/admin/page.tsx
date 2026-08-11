@@ -1,5 +1,6 @@
 // Construye el dashboard administrativo utilizando datos reales de productos, stock y pedidos almacenados en PostgreSQL.
 import Link from "next/link";
+import Brand from "@/components/layout/Brand";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminPage() {
@@ -45,22 +46,14 @@ export default async function AdminPage() {
     }).format(price);
 
   return (
-    <main className="min-h-screen bg-stone-100 text-neutral-900">
-      <header className="border-b border-stone-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div>
-            <p className="text-xl font-bold tracking-[0.15em]">
-              VICTORINO
-            </p>
-
-            <p className="text-xs uppercase tracking-[0.35em] text-neutral-500">
-              Administración
-            </p>
-          </div>
+    <main className="min-h-screen bg-stone-300 text-neutral-900">
+      <header className="border-b border-neutral-800 bg-black text-white">
+        <div className="flex w-full items-center justify-between px-6 py-3 lg:px-10">
+          <Brand href="/admin" subtitle="Administración" />
 
           <Link
             href="/"
-            className="rounded-xl border border-stone-300 px-4 py-2 text-sm font-medium hover:bg-stone-100"
+            className="rounded-xl border border-neutral-600 px-4 py-2 text-sm font-medium hover:bg-neutral-800"
           >
             Ver tienda
           </Link>

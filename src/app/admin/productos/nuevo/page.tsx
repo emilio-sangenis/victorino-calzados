@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function NewProductPage() {
   return (
-    <main className="min-h-screen bg-stone-100 px-6 py-12 text-neutral-900">
+    <main className="min-h-screen bg-stone-300 px-6 py-12 text-neutral-900">
       <section className="mx-auto max-w-4xl rounded-2xl bg-white p-8 shadow-sm sm:p-10">
         <Link
           href="/admin/productos"

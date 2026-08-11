@@ -21,6 +21,8 @@ export type ProductActiveResult = {
   error?: string;
 };
 
+export type ProductFeaturedResult = ProductActiveResult;
+
 export async function setProductActive(
   productId: number,
   active: boolean
@@ -45,6 +47,7 @@ export async function setProductActive(
     },
     select: {
       id: true,
+      featuredPosition: true,
     },
   });
 
@@ -55,14 +58,23 @@ export async function setProductActive(
     };
   }
 
-  await prisma.product.update({
-    where: {
-      id: productId,
-    },
-    data: {
-      active,
-    },
-  });
+  if (!active && product.featuredPosition) {
+    await prisma.$transaction([
+      prisma.product.update({
+        where: { id: productId },
+        data: { active: false, featured: false, featuredPosition: null },
+      }),
+      prisma.product.updateMany({
+        where: { featuredPosition: { gt: product.featuredPosition } },
+        data: { featuredPosition: { decrement: 1 } },
+      }),
+    ]);
+  } else {
+    await prisma.product.update({
+      where: { id: productId },
+      data: { active },
+    });
+  }
 
   revalidatePath("/");
   revalidatePath("/productos");
@@ -73,6 +85,115 @@ export async function setProductActive(
   return {
     success: true,
   };
+}
+
+export async function setProductFeatured(
+  productId: number,
+  featured: boolean
+): Promise<ProductFeaturedResult> {
+  if (!(await hasAdminSession())) {
+    return { success: false, error: "No autorizado." };
+  }
+
+  if (!Number.isInteger(productId) || productId <= 0) {
+    return { success: false, error: "El producto indicado no es válido." };
+  }
+
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    select: { id: true, active: true, featuredPosition: true },
+  });
+
+  if (!product) {
+    return { success: false, error: "No se encontró el producto." };
+  }
+
+  if (featured) {
+    if (!product.active) {
+      return { success: false, error: "Activá el producto antes de destacarlo." };
+    }
+
+    if (product.featuredPosition) {
+      return { success: true };
+    }
+
+    const featuredCount = await prisma.product.count({
+      where: { featured: true },
+    });
+
+    if (featuredCount >= 4) {
+      return { success: false, error: "Ya hay cuatro productos destacados." };
+    }
+
+    await prisma.product.update({
+      where: { id: productId },
+      data: { featured: true, featuredPosition: featuredCount + 1 },
+    });
+  } else if (product.featuredPosition) {
+    await prisma.$transaction([
+      prisma.product.update({
+        where: { id: productId },
+        data: { featured: false, featuredPosition: null },
+      }),
+      prisma.product.updateMany({
+        where: { featuredPosition: { gt: product.featuredPosition } },
+        data: { featuredPosition: { decrement: 1 } },
+      }),
+    ]);
+  }
+
+  revalidateProductPaths(productId);
+  return { success: true };
+}
+
+export async function moveFeaturedProduct(
+  productId: number,
+  direction: -1 | 1
+): Promise<ProductFeaturedResult> {
+  if (!(await hasAdminSession())) {
+    return { success: false, error: "No autorizado." };
+  }
+
+  if (!Number.isInteger(productId) || productId <= 0 || ![-1, 1].includes(direction)) {
+    return { success: false, error: "El movimiento indicado no es válido." };
+  }
+
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    select: { id: true, featuredPosition: true },
+  });
+
+  if (!product?.featuredPosition) {
+    return { success: false, error: "El producto no está destacado." };
+  }
+
+  const targetPosition = product.featuredPosition + direction;
+  if (targetPosition < 1 || targetPosition > 4) {
+    return { success: true };
+  }
+
+  const target = await prisma.product.findFirst({
+    where: { featured: true, featuredPosition: targetPosition },
+    select: { id: true },
+  });
+
+  if (!target) {
+    return { success: true };
+  }
+
+  await prisma.$transaction([
+    prisma.product.update({
+      where: { id: product.id },
+      data: { featuredPosition: targetPosition },
+    }),
+    prisma.product.update({
+      where: { id: target.id },
+      data: { featuredPosition: product.featuredPosition },
+    }),
+  ]);
+
+  revalidateProductPaths(productId);
+  return { success: true };
 }
 
 // Crea un producto inicialmente inactivo para evitar publicarlo antes de cargar sus variantes.

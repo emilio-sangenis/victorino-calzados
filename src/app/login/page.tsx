@@ -15,7 +15,7 @@ export default async function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-stone-100 px-6 py-12 text-neutral-900">
+    <main className="flex min-h-screen items-center justify-center bg-stone-300 px-6 py-12 text-neutral-900">
       <section className="w-full max-w-md rounded-2xl bg-white p-8 shadow-sm sm:p-10">
         <p className="text-center text-xl font-bold tracking-[0.15em]">
           VICTORINO

@@ -22,12 +22,16 @@ model Product {
   price       Int
   image       String
   active      Boolean          @default(true)
+  featured    Boolean          @default(false)
+  featuredPosition Int?
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
 
   variants    ProductVariant[]
   images      ProductImage[]
   orderItems  OrderItem[]
+
+  @@index([featured, featuredPosition])
 }
 
 // Almacena las URLs y metadatos de la galería sin guardar archivos binarios en PostgreSQL.

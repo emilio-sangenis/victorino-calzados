@@ -3,8 +3,10 @@
 // Agrega URLs a la galería y permite seleccionar portada o quitar registros existentes.
 import { useActionState, useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { uploadPresigned } from "@vercel/blob/client";
 import {
   addProductImage,
+  registerUploadedProductImage,
   removeProductImage,
   setPrimaryProductImage,
   type ProductImageFormState,
@@ -25,6 +27,8 @@ type ProductImageManagerProps = {
 };
 
 const initialState: ProductImageFormState = {};
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 export default function ProductImageManager({
   productId,
@@ -33,6 +37,9 @@ export default function ProductImageManager({
 }: ProductImageManagerProps) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
+  const uploadFormRef = useRef<HTMLFormElement>(null);
+  const [uploadPending, setUploadPending] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const [state, formAction, formPending] = useActionState(
@@ -62,8 +69,140 @@ export default function ProductImageManager({
     });
   }
 
+  async function handleFileUpload(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setUploadError(null);
+
+    const formData = new FormData(event.currentTarget);
+    const file = formData.get("file");
+    const alt = String(formData.get("alt") ?? "").trim();
+    const color = String(formData.get("color") ?? "").trim();
+
+    if (!(file instanceof File) || file.size === 0) {
+      setUploadError("Seleccioná una imagen.");
+      return;
+    }
+
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      setUploadError("El archivo debe ser JPG, PNG o WebP.");
+      return;
+    }
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      setUploadError("La imagen no puede superar los 5 MB.");
+      return;
+    }
+
+    if (!alt) {
+      setUploadError("El texto alternativo es obligatorio.");
+      return;
+    }
+
+    setUploadPending(true);
+
+    try {
+      const blob = await uploadPresigned(`products/${productId}/${file.name}`, file, {
+        access: "public",
+        contentType: file.type,
+        handleUploadUrl: "/api/admin/product-images/upload",
+        clientPayload: JSON.stringify({ productId, contentType: file.type }),
+      });
+      const result = await registerUploadedProductImage(productId, {
+        url: blob.url,
+        alt,
+        color,
+      });
+
+      if (!result.success) {
+        setUploadError(
+          result.error ?? "El archivo se subió, pero no se pudo registrar la imagen."
+        );
+        return;
+      }
+
+      uploadFormRef.current?.reset();
+      router.refresh();
+    } catch (error) {
+      console.error("Error uploading product image:", error);
+      setUploadError("No se pudo subir la imagen.");
+    } finally {
+      setUploadPending(false);
+    }
+  }
+
   return (
     <div className="space-y-8">
+      <section className="rounded-2xl bg-white p-6 shadow-sm">
+        <h2 className="text-xl font-bold">Subir imagen</h2>
+        <p className="mt-2 text-sm text-neutral-600">
+          Formatos permitidos: JPG, PNG y WebP. Tamaño máximo: 5 MB.
+        </p>
+
+        <form
+          ref={uploadFormRef}
+          onSubmit={handleFileUpload}
+          className="mt-6 space-y-5"
+        >
+          <div>
+            <label htmlFor="blob-file" className="block text-sm font-medium">
+              Archivo
+            </label>
+            <input
+              id="blob-file"
+              name="file"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              required
+              className="mt-2 block w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm file:mr-4 file:rounded-lg file:border-0 file:bg-stone-100 file:px-4 file:py-2 file:font-semibold"
+            />
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            <div>
+              <label htmlFor="blob-alt" className="block text-sm font-medium">
+                Texto alternativo
+              </label>
+              <input
+                id="blob-alt"
+                name="alt"
+                required
+                defaultValue={productName}
+                placeholder="Ej.: Zapatilla urbana negra de perfil"
+                className="mt-2 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="blob-color" className="block text-sm font-medium">
+                Color asociado (opcional)
+              </label>
+              <input
+                id="blob-color"
+                name="color"
+                placeholder="Ej.: Negro"
+                className="mt-2 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10"
+              />
+            </div>
+          </div>
+
+          {uploadError && (
+            <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+              {uploadError}
+            </p>
+          )}
+
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              disabled={uploadPending}
+              className="rounded-xl bg-neutral-900 px-5 py-3 font-semibold text-white hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {uploadPending ? "Subiendo..." : "Subir imagen"}
+            </button>
+          </div>
+        </form>
+      </section>
+
       <section className="rounded-2xl bg-white p-6 shadow-sm">
         <h2 className="text-xl font-bold">Agregar imagen por URL</h2>
         <p className="mt-2 text-sm text-neutral-600">

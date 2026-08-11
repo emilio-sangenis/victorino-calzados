@@ -47,6 +47,7 @@ export function CartProvider({
   const [items, setItems] = useState<CartItem[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
 
+  /* eslint-disable react-hooks/set-state-in-effect -- La hidratación inicial sincroniza React con localStorage. */
   useEffect(() => {
     const storedCart = localStorage.getItem(STORAGE_KEY);
 
@@ -63,6 +64,7 @@ export function CartProvider({
 
     setIsHydrated(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     if (!isHydrated) {

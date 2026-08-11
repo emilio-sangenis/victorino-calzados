@@ -36,7 +36,7 @@ export default async function ProductPage({
   }).format(product.price);
 
   return (
-    <main className="min-h-screen bg-stone-100 text-neutral-900">
+    <main className="min-h-screen bg-stone-300 text-neutral-900">
       <Header />
 
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-2">

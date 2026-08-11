@@ -29,7 +29,7 @@ export default function CartPage() {
     }).format(price);
 
   return (
-    <main className="min-h-screen bg-stone-100 text-neutral-900">
+    <main className="min-h-screen bg-stone-300 text-neutral-900">
       <Header />
 
       <section className="mx-auto max-w-7xl px-6 py-16">

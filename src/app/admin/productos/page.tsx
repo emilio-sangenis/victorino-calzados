@@ -1,7 +1,9 @@
 // Lista el catálogo completo con su disponibilidad, variantes y stock para administrarlo sin eliminar datos históricos.
 import type { Metadata } from "next";
 import Link from "next/link";
+import Brand from "@/components/layout/Brand";
 import ProductActiveToggle from "@/components/admin/ProductActiveToggle";
+import ProductFeaturedControls from "@/components/admin/ProductFeaturedControls";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -11,6 +13,16 @@ export const metadata: Metadata = {
 export default async function AdminProductsPage() {
   const products = await prisma.product.findMany({
     include: {
+      images: {
+        orderBy: {
+          position: "asc",
+        },
+        take: 1,
+        select: {
+          url: true,
+          alt: true,
+        },
+      },
       variants: {
         select: {
           stock: true,
@@ -35,27 +47,22 @@ export default async function AdminProductsPage() {
     }).format(price);
 
   return (
-    <main className="min-h-screen bg-stone-100 text-neutral-900">
-      <header className="border-b border-stone-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div>
-            <p className="text-xl font-bold tracking-[0.15em]">VICTORINO</p>
-            <p className="text-xs uppercase tracking-[0.35em] text-neutral-500">
-              Administración
-            </p>
-          </div>
+    <main className="min-h-screen bg-stone-300 text-neutral-900">
+      <header className="border-b border-neutral-800 bg-black text-white">
+        <div className="flex w-full items-center justify-between px-6 py-3 lg:px-10">
+          <Brand href="/admin" subtitle="Administración" />
 
           <div className="flex gap-3">
             <Link
               href="/admin"
-              className="rounded-xl border border-stone-300 px-4 py-2 text-sm font-medium hover:bg-stone-100"
+              className="rounded-xl border border-neutral-600 px-4 py-2 text-sm font-medium hover:bg-neutral-800"
             >
               Dashboard
             </Link>
 
             <Link
               href="/"
-              className="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700"
+              className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-stone-200"
             >
               Ver tienda
             </Link>
@@ -101,6 +108,7 @@ export default async function AdminProductsPage() {
                   <th className="px-6 py-4 text-right font-medium">Precio</th>
                   <th className="px-6 py-4 text-right font-medium">Variantes</th>
                   <th className="px-6 py-4 text-right font-medium">Stock</th>
+                  <th className="px-6 py-4 font-medium">Destacado</th>
                   <th className="px-6 py-4 font-medium">Estado</th>
                   <th className="px-6 py-4" />
                 </tr>
@@ -112,6 +120,7 @@ export default async function AdminProductsPage() {
                     (total, variant) => total + variant.stock,
                     0
                   );
+                  const primaryImage = product.images[0];
 
                   return (
                     <tr
@@ -120,8 +129,17 @@ export default async function AdminProductsPage() {
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <span className="flex size-11 items-center justify-center rounded-xl bg-stone-100 text-2xl">
-                            {product.image}
+                          <span className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-stone-100 text-2xl">
+                            {primaryImage ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={primaryImage.url}
+                                alt={primaryImage.alt}
+                                className="size-full object-cover"
+                              />
+                            ) : (
+                              product.image
+                            )}
                           </span>
                           <span className="font-semibold">{product.name}</span>
                         </div>
@@ -138,6 +156,13 @@ export default async function AdminProductsPage() {
                       </td>
                       <td className="px-6 py-4 text-right font-semibold">
                         {totalStock}
+                      </td>
+                      <td className="px-6 py-4">
+                        <ProductFeaturedControls
+                          productId={product.id}
+                          featured={product.featured}
+                          position={product.featuredPosition}
+                        />
                       </td>
                       <td className="px-6 py-4">
                         <span
