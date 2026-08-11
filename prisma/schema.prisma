@@ -26,7 +26,24 @@ model Product {
   updatedAt   DateTime         @updatedAt
 
   variants    ProductVariant[]
+  images      ProductImage[]
   orderItems  OrderItem[]
+}
+
+// Almacena las URLs y metadatos de la galería sin guardar archivos binarios en PostgreSQL.
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  url       String
+  alt       String
+  position  Int      @default(0)
+  color     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, position])
 }
 
 model ProductVariant {
