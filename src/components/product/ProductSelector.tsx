@@ -119,7 +119,7 @@ export default function ProductSelector({
               addItem(product, selectedVariant);
             }
           }}
-          className={`mt-auto w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition sm:px-6 sm:py-3.5 sm:text-base ${
+          className={`mt-3 w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition sm:px-6 sm:py-3.5 sm:text-base lg:mt-auto ${
             selectedVariant && selectedVariant.stock > 0
               ? "cursor-pointer bg-neutral-900 hover:bg-neutral-700"
               : "cursor-not-allowed bg-neutral-400"
@@ -130,7 +130,7 @@ export default function ProductSelector({
       )}
 
       {!hasStock && (
-        <span className="mt-auto block w-full cursor-not-allowed rounded-xl bg-neutral-400 px-5 py-3 text-center text-sm font-semibold text-white sm:px-6 sm:py-3.5 sm:text-base">
+        <span className="mt-3 block w-full cursor-not-allowed rounded-xl bg-neutral-400 px-5 py-3 text-center text-sm font-semibold text-white sm:px-6 sm:py-3.5 sm:text-base lg:mt-auto">
           Sin stock
         </span>
       )}

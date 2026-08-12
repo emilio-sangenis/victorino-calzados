@@ -47,7 +47,7 @@ export default function ProductGallery({
         />
       </div>
 
-      <div className="mt-5 grid auto-cols-[104px] grid-flow-col gap-4 overflow-x-auto pb-2 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex lg:flex-col lg:overflow-visible lg:pb-0">
+      <div className="mt-5 grid auto-cols-[120px] grid-flow-col gap-4 overflow-x-auto pb-2 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex lg:flex-col lg:overflow-visible lg:pb-0">
           {images.map((image) => {
             const selected = image.id === selectedImage.id;
 
