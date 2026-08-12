@@ -82,16 +82,16 @@ export default async function ProductPage({
             productName={product.name}
           />
 
-          <div className="flex flex-col rounded-2xl bg-stone-200 p-7 shadow-sm lg:sticky lg:top-24 lg:h-[620px] lg:overflow-y-auto lg:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-fuchsia-600">
+          <div className="flex flex-col rounded-2xl bg-stone-200 p-5 shadow-sm sm:p-7 lg:sticky lg:top-24 lg:h-[620px] lg:overflow-y-auto lg:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-fuchsia-600 sm:text-sm sm:tracking-[0.3em]">
               {product.category}
             </p>
 
-            <h1 className="mt-2 text-4xl font-bold leading-[1.08] lg:text-[44px]">
+            <h1 className="mt-2 text-3xl font-bold leading-[1.08] sm:text-4xl lg:text-[44px]">
               {product.name}
             </h1>
 
-            <p className="mt-3 text-3xl font-bold leading-tight">{formattedPrice}</p>
+            <p className="mt-3 text-2xl font-bold leading-tight sm:text-3xl">{formattedPrice}</p>
 
             {showDescription && (
               <div className="mt-6 border-t border-stone-200 pt-5">

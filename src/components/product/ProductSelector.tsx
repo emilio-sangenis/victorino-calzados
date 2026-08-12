@@ -45,7 +45,7 @@ export default function ProductSelector({
   }
 
   return (
-    <div className="mt-6 flex flex-1 flex-col">
+    <div className="mt-5 flex flex-1 flex-col sm:mt-6">
       <div>
         <p className="mb-2 font-semibold leading-tight">
           Color
@@ -58,7 +58,7 @@ export default function ProductSelector({
               onClick={() =>
                 handleColorSelection(color)
               }
-              className={`rounded-xl border px-5 py-2.5 ${
+              className={`rounded-xl border px-4 py-2 text-sm sm:px-5 sm:py-2.5 sm:text-base ${
                 selectedColor === color
                   ? "border-neutral-900 bg-neutral-900 text-white"
                   : "border-stone-300 bg-white hover:border-neutral-900"
@@ -71,7 +71,7 @@ export default function ProductSelector({
       </div>
 
       {selectedColor && (
-        <div className="mt-6">
+        <div className="mt-5 sm:mt-6">
           <p className="mb-2 font-semibold leading-tight">
             Talle
           </p>
@@ -85,7 +85,7 @@ export default function ProductSelector({
                   onClick={() =>
                     setSelectedSize(variant.size)
                   }
-                  className={`rounded-xl border px-5 py-2.5 ${
+                  className={`rounded-xl border px-4 py-2 text-sm sm:px-5 sm:py-2.5 sm:text-base ${
                     variant.stock === 0
                       ? "cursor-not-allowed border-stone-200 bg-stone-200 text-stone-400"
                       : selectedSize === variant.size
@@ -119,7 +119,7 @@ export default function ProductSelector({
               addItem(product, selectedVariant);
             }
           }}
-          className={`mt-auto w-full rounded-xl px-6 py-3.5 font-semibold text-white transition ${
+          className={`mt-auto w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition sm:px-6 sm:py-3.5 sm:text-base ${
             selectedVariant && selectedVariant.stock > 0
               ? "cursor-pointer bg-neutral-900 hover:bg-neutral-700"
               : "cursor-not-allowed bg-neutral-400"
@@ -130,7 +130,7 @@ export default function ProductSelector({
       )}
 
       {!hasStock && (
-        <span className="mt-auto block w-full cursor-not-allowed rounded-xl bg-neutral-400 px-6 py-3.5 text-center font-semibold text-white">
+        <span className="mt-auto block w-full cursor-not-allowed rounded-xl bg-neutral-400 px-5 py-3 text-center text-sm font-semibold text-white sm:px-6 sm:py-3.5 sm:text-base">
           Sin stock
         </span>
       )}

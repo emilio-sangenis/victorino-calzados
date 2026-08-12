@@ -57,13 +57,13 @@ export default function Header() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-800 bg-black text-white shadow-lg">
-        <div className="flex w-full items-center px-6 py-3 lg:px-10">
-          <Brand subtitle="Calzados" />
-
-          <button type="button" onClick={openMenu} aria-label="Abrir menú de categorías" aria-expanded={menuOpen} aria-controls="category-drawer" className="ml-5 flex size-10 flex-col items-center justify-center gap-1.5 rounded-full transition hover:bg-current/10">
+        <div className="flex w-full items-center px-3 py-3 sm:px-6 lg:px-10">
+          <button type="button" onClick={openMenu} aria-label="Abrir menú de categorías" aria-expanded={menuOpen} aria-controls="category-drawer" className="mr-1 flex size-9 shrink-0 flex-col items-center justify-center gap-1.5 rounded-full transition hover:bg-current/10 sm:mr-5 sm:size-10">
             <span className="h-0.5 w-5 bg-current" />
             <span className="ml-2.5 h-0.5 w-3.5 self-start bg-current" />
           </button>
+
+          <Brand subtitle="Calzados" compactOnMobile />
 
           <div className="ml-auto flex items-center gap-8">
             <nav className="hidden gap-8 text-sm font-medium md:flex">
@@ -71,7 +71,7 @@ export default function Header() {
               <Link href="/productos" className="hover:text-fuchsia-400">Productos</Link>
               <Link href="/#contacto" className="hover:text-fuchsia-400">Contacto</Link>
             </nav>
-            <Link href="/carrito" className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900 transition-colors hover:bg-stone-200">
+            <Link href="/carrito" className="whitespace-nowrap rounded-full bg-white px-3 py-2 text-xs font-semibold text-neutral-900 transition-colors hover:bg-stone-200 sm:px-5 sm:text-sm">
               Mi pedido ({totalItems})
             </Link>
           </div>

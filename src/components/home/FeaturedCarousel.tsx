@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
 import ProductCard from "@/components/product/ProductCard";
 import type { Product } from "@/types/product";
 
@@ -15,6 +15,7 @@ export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
     getServerItemsPerPage
   );
   const [page, setPage] = useState(0);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const pageCount = Math.max(1, Math.ceil(products.length / perPage));
   const currentPage = Math.min(page, pageCount - 1);
   const firstVisibleIndex = Math.min(
@@ -26,9 +27,37 @@ export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
     return null;
   }
 
+  function handleTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+    const touch = event.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  }
+
+  function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
+    const start = touchStart.current;
+    const touch = event.changedTouches[0];
+    touchStart.current = null;
+
+    if (!start || !touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+
+    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+    if (deltaX < 0) {
+      setPage(Math.min(pageCount - 1, currentPage + 1));
+    } else {
+      setPage(Math.max(0, currentPage - 1));
+    }
+  }
+
   return (
     <div className="relative">
-      <div className="overflow-hidden">
+      <div
+        className="touch-pan-y overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${firstVisibleIndex * (100 / perPage)}%)` }}

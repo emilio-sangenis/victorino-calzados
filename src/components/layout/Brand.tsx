@@ -5,13 +5,14 @@ type BrandProps = {
   href?: string;
   subtitle: string;
   tone?: "dark" | "light";
+  compactOnMobile?: boolean;
 };
 
-export default function Brand({ href = "/", subtitle, tone = "light" }: BrandProps) {
+export default function Brand({ href = "/", subtitle, tone = "light", compactOnMobile = false }: BrandProps) {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 transition-colors ${
+      className={`flex items-center transition-colors ${compactOnMobile ? "gap-2 sm:gap-3" : "gap-3"} ${
         tone === "dark" ? "text-neutral-900" : "text-white"
       }`}
     >
@@ -21,15 +22,15 @@ export default function Brand({ href = "/", subtitle, tone = "light" }: BrandPro
         width={40}
         height={40}
         priority
-        className={`size-10 shrink-0 object-contain transition ${
+        className={`${compactOnMobile ? "size-8 sm:size-10" : "size-10"} shrink-0 object-contain transition ${
           tone === "dark" ? "brightness-0" : ""
         }`}
       />
       <span>
-        <span className="block font-serif text-xl font-bold tracking-[0.15em]">
+        <span className={`block font-serif font-bold ${compactOnMobile ? "text-base tracking-[0.12em] sm:text-xl sm:tracking-[0.15em]" : "text-xl tracking-[0.15em]"}`}>
           VICTORINO
         </span>
-        <span className="block text-xs uppercase tracking-[0.35em] text-fuchsia-400">
+        <span className={`block uppercase text-fuchsia-400 ${compactOnMobile ? "text-[10px] tracking-[0.25em] sm:text-xs sm:tracking-[0.35em]" : "text-xs tracking-[0.35em]"}`}>
           {subtitle}
         </span>
       </span>
